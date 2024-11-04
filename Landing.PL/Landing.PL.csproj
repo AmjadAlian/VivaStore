@@ -1,0 +1,159 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>aspnet-Landing.PL-cf8b3563-8655-4d4c-80f5-81196fde3499</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="Areas\Identity\Pages\Account\AccessDenied.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ConfirmEmail.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ConfirmEmailChange.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ExternalLogin.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Lockout.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Login.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\LoginWith2fa.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\LoginWithRecoveryCode.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Logout.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\ChangePassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\DeletePersonalData.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\Disable2fa.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\DownloadPersonalData.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\Email.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\EnableAuthenticator.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\GenerateRecoveryCodes.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\Index.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\SetPassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\ShowRecoveryCodes.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\TwoFactorAuthentication.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\_Layout.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\_ManageNav.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\_StatusMessage.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Manage\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\Register.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\RegisterConfirmation.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ResendEmailConfirmation.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ResetPassword.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\ResetPasswordConfirmation.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\_StatusMessage.cshtml" />
+    <None Include="Areas\Identity\Pages\Account\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\Error.cshtml" />
+    <None Include="Areas\Identity\Pages\_ValidationScriptsPartial.cshtml" />
+    <None Include="Areas\Identity\Pages\_ViewImports.cshtml" />
+    <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
+    <None Include="Views\Home\Index.cshtml" />
+    <None Include="Views\Home\Privacy.cshtml" />
+    <None Include="Views\Shared\Error.cshtml" />
+    <None Include="Views\Shared\_Layout.cshtml" />
+    <None Include="Views\Shared\_LoginPartial.cshtml" />
+    <None Include="Views\Shared\_ValidationScriptsPartial.cshtml" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\animated.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\bordered-pulled.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\core.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\fixed-width.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\font-awesome.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\icons.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\larger.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\list.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\mixins.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\path.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\rotated-flipped.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\screen-reader.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\stacked.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\less\variables.less" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\font-awesome.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_animated.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_bordered-pulled.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_core.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_fixed-width.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_icons.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_larger.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_list.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_mixins.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_path.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_rotated-flipped.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_screen-reader.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_stacked.scss" />
+    <None Include="wwwroot\fonts\font-awesome-4.7.0\scss\_variables.scss" />
+    <None Include="wwwroot\fonts\iconic\fonts\Material-Design-Iconic-Font.svg" />
+    <None Include="wwwroot\fonts\iconic\fonts\Material-Design-Iconic-Font.woff2" />
+    <None Include="wwwroot\fonts\linearicons-v1.0.0\WebFont\Linearicons-Free.svg" />
+    <None Include="wwwroot\fonts\linearicons-v1.0.0\WebFont\Linearicons-Free.woff2" />
+    <None Include="wwwroot\js\site.js" />
+    <None Include="wwwroot\vendor\animsition\js\animsition.js" />
+    <None Include="wwwroot\vendor\animsition\js\animsition.min.js" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap-grid.css.map" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap-grid.min.css.map" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap-reboot.css.map" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap-reboot.min.css.map" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.css.map" />
+    <None Include="wwwroot\vendor\bootstrap\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\bootstrap.min.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\popper.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\popper.min.js" />
+    <None Include="wwwroot\vendor\bootstrap\js\tooltip.js" />
+    <None Include="wwwroot\vendor\countdowntime\countdowntime.js" />
+    <None Include="wwwroot\vendor\daterangepicker\daterangepicker.js" />
+    <None Include="wwwroot\vendor\daterangepicker\moment.js" />
+    <None Include="wwwroot\vendor\daterangepicker\moment.min.js" />
+    <None Include="wwwroot\vendor\isotope\isotope.pkgd.min.js" />
+    <None Include="wwwroot\vendor\jqueryui\external\jquery\jquery.js" />
+    <None Include="wwwroot\vendor\jqueryui\jquery-ui.js" />
+    <None Include="wwwroot\vendor\jqueryui\jquery-ui.min.js" />
+    <None Include="wwwroot\vendor\jquery\jquery-3.2.1.min.js" />
+    <None Include="wwwroot\vendor\lightbox2\js\lightbox-plus-jquery.js" />
+    <None Include="wwwroot\vendor\lightbox2\js\lightbox-plus-jquery.min.js" />
+    <None Include="wwwroot\vendor\lightbox2\js\lightbox-plus-jquery.min.map" />
+    <None Include="wwwroot\vendor\lightbox2\js\lightbox.js" />
+    <None Include="wwwroot\vendor\lightbox2\js\lightbox.min.js" />
+    <None Include="wwwroot\vendor\lightbox2\js\lightbox.min.map" />
+    <None Include="wwwroot\vendor\MagnificPopup\jquery.magnific-popup.js" />
+    <None Include="wwwroot\vendor\MagnificPopup\jquery.magnific-popup.min.js" />
+    <None Include="wwwroot\vendor\parallax100\parallax100.js" />
+    <None Include="wwwroot\vendor\perfect-scrollbar\perfect-scrollbar.min.js" />
+    <None Include="wwwroot\vendor\select2\select2.js" />
+    <None Include="wwwroot\vendor\select2\select2.min.js" />
+    <None Include="wwwroot\vendor\slick\config.rb" />
+    <None Include="wwwroot\vendor\slick\fonts\slick.svg" />
+    <None Include="wwwroot\vendor\slick\slick-theme.less" />
+    <None Include="wwwroot\vendor\slick\slick-theme.scss" />
+    <None Include="wwwroot\vendor\slick\slick.js" />
+    <None Include="wwwroot\vendor\slick\slick.less" />
+    <None Include="wwwroot\vendor\slick\slick.min.js" />
+    <None Include="wwwroot\vendor\slick\slick.scss" />
+    <None Include="wwwroot\vendor\sweetalert\sweetalert.min.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.6" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Landing.BLL\Landing.BLL.csproj" />
+  </ItemGroup>
+
+</Project>

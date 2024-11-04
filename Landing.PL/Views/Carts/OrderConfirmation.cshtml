@@ -1,0 +1,73 @@
+﻿
+@{
+    ViewData["Title"] = "OrderConfirmation";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@model IEnumerable<OrderVM>
+@section style{
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.1.8/css/dataTables.dataTables.css" />
+	<link rel="stylesheet" href="~/css/style.css"/>
+ 
+    <style>
+        footer{
+            margin-top:73px !important;
+        }
+        main{
+            padding-top:1px ;
+            margin-top:80px;
+        }
+
+        .limiter-menu-desktop{
+            background-color:#222;
+        }
+    </style>
+}
+
+
+<h2 class="mt-5">Your Orders</h2>
+
+<table class=" table table-bordered dataTable w-75">
+    <thead>
+        <tr>
+           
+            <th>Order Date</th>
+         
+            <th>Status</th>
+            <th>Total Amount</th>
+            <th>Products</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var order in Model)
+        {
+            <tr>               
+                <td>@order.OrderDate.ToString("g")</td>
+                <td>@order.Status</td>
+                <td>@order.TotalAmount</td>
+                <td>
+                    <ul>
+                        @foreach (var item in order.OrderItems)
+                        {
+                            <li>
+                                <img src="~/files/imgs/@item.ImgName" alt="Product Image" width="50" height="50" />
+                                @item.ProductName - Quantity: @item.Quantity - Price: @item.Price
+                            </li>
+                        }
+                    </ul>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table> 
+@section scripts{
+
+    <script src="https://cdn.datatables.net/2.1.8/js/dataTables.js"></script>
+    <script>
+        let table = new DataTable('Table');
+
+    </script>
+
+	
+}
+

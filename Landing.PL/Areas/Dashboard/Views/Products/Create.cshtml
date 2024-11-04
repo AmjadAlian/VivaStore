@@ -1,0 +1,85 @@
+﻿@section Header{
+    Create
+}
+@model ProductFormVM
+
+<div class="col-md-12">
+    <div class="card card-primary" bis_skin_checked="1">
+        <div class="card-header" bis_skin_checked="1">
+            <h3 class="card-title">Quick Example</h3>
+        </div>
+        <form asp-area="dashboard" asp-controller="Products" asp-action="Create" enctype="multipart/form-data">
+            <div class="card-body" bis_skin_checked="1">
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control textarea" placeholder="Description">
+                </div>
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Stock"></label>
+                    <input asp-for="Stock" class="form-control" placeholder="In Stock">
+                </div>
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" placeholder="Price">
+                </div>
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Img"></label>
+                    <input asp-for="Img" class="form-control-file">
+                </div>
+                <div class="form-group">
+                    <label asp-for="AdditionalImages">Additional Images</label>
+                    <input asp-for="AdditionalImages" type="file" multiple class="form-control-file">
+                    <span asp-validation-for="AdditionalImages" class="text-danger"></span>
+                </div>
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="IsActive"></label>
+                    <select asp-for="IsActive" class="form-control">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId">Category</label>
+                    <select asp-for="CategoryId" asp-items="Model.Categories" class="form-control">
+                        <option value="">-- Select A Category --</option> 
+                    </select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="card-footer d-flex justify-content-between" bis_skin_checked="1">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <a asp-area="Dashboard" asp-controller="Products" asp-action="Index" class="btn btn-success btn">
+                    Back
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+@section scripts{
+    <script src="https://cdn.tiny.cloud/1/nz03qoe62zt6xuijqoxkws3c80s3bwjmbqj83xwhjn35f8f4/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+    <script>
+        tinymce.init({
+            selector: '.textarea',
+            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+            plugins: [
+                // Core editing features
+                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                // Your account includes a free trial of TinyMCE premium features
+                // Try the most popular premium features until Nov 14, 2024:
+                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+                // Early access to document converters
+                'importword', 'exportword', 'exportpdf'
+            ],
+        });
+    </script>
+
+   
+}
+
+
+

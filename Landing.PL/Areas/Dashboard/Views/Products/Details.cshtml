@@ -1,0 +1,39 @@
+﻿@model ProductVM
+@section Header {
+    Details
+}
+<h2>Category Details</h2>
+<div class="col-md-12">
+
+    <div class="card">
+        <div class="card-body">
+            <h4 class="card-title">Product Name: @Model.Name</h4>
+
+            <p class="card-text">
+                <strong>Description:</strong> @Model.Description
+            </p>
+
+            <p class="card-text">
+                <strong>Category Name:</strong> @Model.CategoryName
+            </p>
+
+
+            <p class="card-text">
+                <strong>Price:</strong> @Model.Price
+            </p>
+
+            <p class="card-text">
+                <strong>In Stock:</strong> @Model.Stock
+            </p>
+
+            <div>
+                <img src="~/files/imgs/@Model.ImgName" style="width:250px"/>
+            </div>
+          
+           
+
+            <a asp-area="Dashboard" asp-controller="Products" asp-action="Index" class="btn btn-primary mt-2">Back to List</a>
+        </div>
+    </div>
+</div>
+

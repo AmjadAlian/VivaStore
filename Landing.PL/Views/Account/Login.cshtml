@@ -1,0 +1,41 @@
+﻿@model LoginVM
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+
+<!-- Sing in  Form -->
+<section class="sign-in">
+    <div class="container">
+        <div class="signin-content">
+            <div class="signin-image">
+                <figure><img src="~/images/signin-image.jpg" alt="sing up image"></figure>
+                <a href="#" class="signup-image-link">Create an account</a>
+            </div>
+
+            <div class="signin-form">
+                <h2 class="form-title">Sign up</h2>
+                <form method="POST" class="register-form" id="login-form" asp-controller="Account" asp-action="Login">
+                    <div class="form-group">
+                        <label asp-for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
+                        <input asp-for="Email" placeholder="Your Email" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Password"><i class="zmdi zmdi-lock"></i></label>
+                        <input asp-for="Password" placeholder="Password" />
+                    </div>
+                    <div class="form-group">
+                        <input asp-for="RememberMe" class="agree-term" />
+                        <label asp-for="RememberMe" class="label-agree-term"><span><span></span></span>Remember me</label>
+                    </div>
+                    <div class="form-group form-button">
+                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
+                    </div>
+                </form>
+               
+            </div>
+        </div>
+    </div>
+</section>
+

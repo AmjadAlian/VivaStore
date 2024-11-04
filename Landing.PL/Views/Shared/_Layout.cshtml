@@ -1,0 +1,27 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+   <partial name="_Head" />
+   @RenderSection("style",required:false)
+</head>
+<body>
+  
+    <partial name="_Header" />
+	
+
+	
+
+    <div >
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="bg3 p-t-75 p-b-32">
+        <partial name="_Footer" />
+    </footer>
+   
+    <partial name="_Scripts">
+        @RenderSection("scripts", required: false)
+</body>
+</html>

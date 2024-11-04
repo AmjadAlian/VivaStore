@@ -1,0 +1,117 @@
+﻿@model IEnumerable<OrderVM>
+@section Header{
+    Orders
+
+}
+@section style {
+    <link href="//cdn.datatables.net/2.1.8/css/dataTables.dataTables.min.css" rel="stylesheet" />
+    <style>
+        ul{
+            list-style:none;
+            padding:0;
+        }
+        .table{
+            table-layout:fixed;
+        }
+    </style>
+}
+
+
+
+<div class="card-body">
+    <table class="table table-bordered" id="ordersTable">
+        <thead>
+            <tr>
+                
+                <th>User</th>
+                <th>Order Date</th>
+                <th>Payment Method</th>
+                <th>Status</th>
+                <th>Address</th>
+                <th>Items</th>
+                <th>Total Amount</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var order in Model)
+            {
+                <tr>
+                  
+                    <td>@order.UserName</td>
+                    <td>@order.OrderDate.ToString("g")</td>
+                    <td>@order.PaymentMethod</td>
+                    <td>@order.Status</td>
+                    <td>@order.ShippingAddress</td>
+                    <td>
+                        <ul>
+                            @foreach (var item in order.OrderItems)
+                            {
+                                
+                                <a asp-controller="Products" asp-action="Details" asp-route-id="@item.ProductId">
+                                <li class="mb-1 text-dark">@item.ProductName - Quantity: @item.Quantity - Price: @item.Price - <img width="40px" height="40" src="~/files/imgs/@item.ImgName"/></li>
+                                </a>
+
+
+
+                            }
+                        </ul>
+                    </td>
+                    <td>
+                        @order.TotalAmount.ToString("C")
+                    </td>
+
+                    <td>
+                        <form asp-action="UpdateStatus" method="post" style="display:inline;">
+                            <input type="hidden" name="id" value="@order.Id" />
+                            <select name="status" class="form-select">
+                                <option value="Pending" )>Pending</option>
+                                <option value="Processing" >Processing</option>
+                                <option value="Shipped" >Shipped</option>
+                                <option value="Completed">Completed</option>
+                            </select>
+                            <button type="submit" class="btn btn-primary">Update</button>
+                        </form>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+
+@section scripts {
+
+    <script src="//cdn.datatables.net/2.1.8/js/dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js" integrity="sha512-XMVd28F1oH/O71fzwBnV7HucLxVwtxf26XV8P4wPk26EDxuGZ91N8bsOttmnomcCD3CS5ZMRL50H0GgOHvegtg=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/pdfmake.min.js" integrity="sha512-axXaF5grZBaYl7qiM6OMHgsgVXdSLxqq0w7F4CQxuFyrcPmn0JfnqsOtYHUun80g6mRRdvJDrTCyL8LQqBOt/Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.12/vfs_fonts.min.js" integrity="sha512-EFlschXPq/G5zunGPRSYqazR1CMKj0cQc8v6eMrQwybxgIbhsfoO5NAMQX3xFDQIbFlViv53o7Hy+yCWw6iZxA=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.colVis.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"> </script>
+    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"> </script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+
+
+        new DataTable('table', {
+            layout: {
+                topStart: {
+                    buttons: [
+                        'copy', 'excel', 'pdf'
+                    ]
+                }
+            }
+        });
+
+        </script>
+    
+        }
+       

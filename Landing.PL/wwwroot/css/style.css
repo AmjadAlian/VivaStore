@@ -1,0 +1,41 @@
+﻿body {
+    background-color: rgb(0,0,0);
+
+    color:red;
+}
+
+
+div.dt-container .dt-paging .dt-paging-button.disabled, div.dt-container .dt-paging .dt-paging-button.disabled:hover, div.dt-container .dt-paging .dt-paging-button.disabled:active {
+    color: #fff !important;
+}
+
+.dt-layout-cell table{
+    color:#fff !important;
+}
+div.dt-container.dt-empty-footer tbody > tr:last-child > * {
+    border-bottom:1px solid #fff !important;
+}
+.dt-container{
+   width:95%;
+   margin:auto;
+}
+
+main{
+    background-color:black;
+}
+
+footer {
+    padding-top: 40px;
+    padding-bottom: 91px !important;
+}
+.pt-60{
+    padding-top:60px;
+}
+
+.current {
+    background-color: #333 !important;
+    color: #fff !important;
+}
+.dt-paging-button{
+    color:#fff !important;
+}

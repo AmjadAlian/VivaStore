@@ -1,0 +1,92 @@
+﻿@section Header {
+    Edit
+}
+@model ProductFormVM
+
+<div class="col-md-12">
+    <div class="card card-primary" bis_skin_checked="1">
+        <div class="card-header" bis_skin_checked="1">
+            <h3 class="card-title">Quick Example</h3>
+        </div>
+        <form asp-area="Dashboard" asp-controller="Products" asp-action="Edit" enctype="multipart/form-data">
+            <div class="card-body" bis_skin_checked="1">
+               
+                    
+             <input asp-for="Id" type="hidden">
+               <input asp-for="ImgName" type="hidden" />
+                
+            <div class="card-body" bis_skin_checked="1">
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Name"></label>
+                    <input asp-for="Name" class="form-control" placeholder="Enter Name">
+                </div>
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control" placeholder="Description">
+                </div>
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Stock"></label>
+                    <input asp-for="Stock" class="form-control" placeholder="In Stock">
+                </div>
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="Price"></label>
+                    <input asp-for="Price" class="form-control" placeholder="Price">
+                </div>
+                    <div class="form-group" bis_skin_checked="1">
+                        <label asp-for="Img"></label>
+                        <input asp-for="Img" class="form-control-file">
+                    </div>
+
+                    <div>
+                        <label>Additional Images</label>
+                        <div>
+                            @if (Model.AdditionalImgNames != null && Model.AdditionalImgNames.Any())
+                            {
+                                <ul>
+                                    @for (int i = 0; i < Model.AdditionalImgNames.Count; i++)
+                                    {
+                                        <li>
+                                            <img src="~/files/imgs/@Model.AdditionalImgNames[i]" alt="Additional Image" width="100" />
+
+                                            <!-- خيار حذف الصورة الإضافية -->
+                                            <input type="checkbox" name="DeleteAdditionalImages" value="@Model.AdditionalImgNames[i]" />
+                                            <input type="hidden" asp-for="AdditionalImgNames[i]" />
+                                            <label>Delete this image</label>
+                                        </li>
+                                    }
+                                </ul>
+                            }
+                            else
+                            {
+                                <p>No additional images uploaded.</p>
+                            }
+                        </div>
+                        <label asp-for="AdditionalImages">Add New Additional Images</label>
+                        <input asp-for="AdditionalImages" type="file" multiple class="form-control-file" />
+                    </div>
+
+                <div class="form-group" bis_skin_checked="1">
+                    <label asp-for="IsActive"></label>
+                    <select asp-for="IsActive" class="form-control">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label asp-for="CategoryId">Category</label>
+                    <select asp-for="CategoryId" asp-items="Model.Categories" class="form-control"></select>
+                    <span asp-validation-for="CategoryId" class="text-danger"></span>
+                </div>
+            </div>
+                <div class="card-footer d-flex justify-content-between" bis_skin_checked="1">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a asp-area="Dashboard" asp-controller="Products" asp-action="Index" class="btn btn-success btn">
+                        Back
+                    </a>
+                </div>
+        </form>
+    </div>
+</div>
+
+
+
