@@ -17,50 +17,51 @@
         .forgotPassword a{
             color:#222;
         }
-
+        
     </style>
 
 
 <!-- Sing in  Form -->
-<section class="sign-in">
-    <div class="container">
-        <div class="signin-content">
-            <div class="signin-image">
-                <figure><img src="~/images/signin-image.jpg" alt="sing up image"></figure>
-                <a asp-action="Register" asp-controller="Account" class="signup-image-link">Create an account</a>
+<div class="login">
+    <img src="~/images/blob-scene-haikei.png" alt="login image" class="login__img">
+
+    <form asp-action="Login" asp-controller="Account" class="container">
+        <h1 class="login__title">Login</h1>
+
+        <div class="login__content">
+            <div class="login__box">
+                <i class="ri-user-3-line login__icon"></i>
+
+                <div class="login__box-input">
+                    <input asp-for="Email"  class="login__input"  placeholder=" ">
+                    <label asp-for="Email"  class="login__label">Email</label>
+                </div>
             </div>
 
-            <div class="signin-form">
-                <h2 class="form-title">Sign In</h2>
-                <form method="POST" class="register-form" id="login-form" asp-controller="Account" asp-action="Login">
-                    <div class="form-group">
-                        <label asp-for="Email"><i class="zmdi zmdi-account material-icons-name"></i></label>
-                        <input asp-for="Email" placeholder="Your Email" />
-                    </div>
-                    <div class="form-group">
-                        <label asp-for="Password"><i class="zmdi zmdi-lock"></i></label>
-                        <input asp-for="Password" placeholder="Password" />
-                    </div>
-                    <div class=" mulitForm-group ">
-                        <div class="m-0 form-group">
-                            <input asp-for="RememberMe" class="agree-term" />
-                            <label asp-for="RememberMe" class="label-agree-term m-0"><span><span></span></span>Remember me</label>
+            <div class="login__box">
+                <i class="ri-lock-2-line login__icon"></i>
 
-                        </div>
-                        <div class="form-group forgotPassword">
-                            <a asp-action="ForgotPassword" asp-controller="Account">Forgot Password</a>
-
-                        </div>
-                    </div>
-                
-                    <div class="form-group form-button">
-                        <input type="submit" name="signin" id="signin" class="form-submit" value="Log in" />
-                    </div>
-
-                </form>
-               
+                <div class="login__box-input">
+                    <input asp-for=Password class="login__input"  placeholder=" ">
+                    <label asp-for="Password" class="login__label">Password</label>
+                    <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+                </div>
             </div>
         </div>
-    </div>
-</section>
 
+        <div class="login__check">
+            <div class="login__check-group">
+                <input asp-for=RememberMe class="login__check-input" >
+                <label asp-for=RememberMe class="login__check-label">Remember me</label>
+            </div>
+
+            <a asp-action="ForgotPassword" asp-controller="Account" class="login__forgot">Forgot Password?</a>
+        </div>
+
+        <button type="submit" class="login__button">Login</button>
+
+        <p class="login__register">
+            Don't have an account? <a asp-action="Register" asp-controller="Account">Register</a>
+        </p>
+    </form>
+</div>

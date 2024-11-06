@@ -34,7 +34,7 @@ namespace Landing.PL.Controllers
 
 			var CategoryEntities = await context.Categories
 		  .Where(s => s.IsActive)
-		  .OrderBy(s => s.Order).Take(5)
+		  .OrderBy(s => s.Order)
 		  .ToListAsync();
 
 			var CategoryViewModels = mapper.Map<List<CategoryVM>>(CategoryEntities);
