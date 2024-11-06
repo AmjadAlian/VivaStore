@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using VivaStore.DAL.Data;
@@ -7,6 +8,7 @@ using VivaStore.PL.Areas.Dashboard.ViewModels;
 namespace VivaStore.PL.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
+    [Authorize(Roles = "Admin,superAdmin")]
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext context;
@@ -49,6 +51,7 @@ namespace VivaStore.PL.Areas.Dashboard.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public IActionResult UpdateStatus(int id, string status)
         {
             var order = context.Orders.Find(id);

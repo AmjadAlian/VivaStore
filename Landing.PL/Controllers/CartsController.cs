@@ -98,7 +98,7 @@ namespace Landing.PL.Controllers
             order.OrderDate = DateTime.Now;
             order.TotalAmount = cart.CartItems.Sum(ci => ci.Product.Price * ci.Quantity);
 
-            // تأكد من أن OrderItems تم تهيئتها
+           
             if (order.OrderItems == null)
             {
                 order.OrderItems = new List<OrderItem>();
@@ -132,16 +132,15 @@ namespace Landing.PL.Controllers
 
 		public async Task<IActionResult> OrderConfirmation()
 		{
-			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier); // الحصول على معرف المستخدم الحالي
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-			// جلب الطلبات الخاصة بالمستخدم الحالي، مع تضمين تفاصيل المنتجات
+			
 			var orders = await context.Orders
 				.Where(o => o.UserId == userId)
 				.Include(o => o.OrderItems)
 					.ThenInclude(oi => oi.Product)
 				.ToListAsync();
 
-			// تحويل الطلبات إلى OrderVM باستخدام AutoMapper
 			var orderVMs = mapper.Map<List<OrderVM>>(orders);
 
 			return View(orderVMs);
@@ -154,11 +153,11 @@ namespace Landing.PL.Controllers
 			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
 			if (userId == null)
 			{
-				// Indicate in JSON that a redirection is needed
+				
 				return Json(new { redirected = true, loginUrl = Url.Action("Login", "Account") });
 			}
 
-			// Find or create the user's active cart
+			
 			var cart = await context.Carts
 				.Include(c => c.CartItems)
 				.FirstOrDefaultAsync(c => c.UserId == userId && c.IsActive);
@@ -169,11 +168,11 @@ namespace Landing.PL.Controllers
 				context.Carts.Add(cart);
 			}
 
-			// Add or update the cart item
+			
 			var cartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
 			if (cartItem != null)
 			{
-				cartItem.Quantity += 1; // Increase quantity if item exists
+				cartItem.Quantity += 1;
 			}
 			else
 			{
@@ -189,7 +188,7 @@ namespace Landing.PL.Controllers
 
 			await context.SaveChangesAsync();
 
-			// Count unique items in the cart
+			
 			var uniqueItemCount = cart.CartItems.Count;
 			return Json(new { redirected = false, success = true, itemCount = uniqueItemCount });
 		}
