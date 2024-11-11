@@ -10,7 +10,7 @@ using VivaStore.PL.Helpers;
 
 namespace VivaStore.PL.Areas.Dashboard.Controllers
 {
-    [Authorize(Roles = "Admin,superAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     [Area("dashboard")]
     public class ProductsController : Controller
     {

@@ -11,5 +11,7 @@ namespace Landing.PL.Models.ViewModel
 		public int Quantity { get; set; }
 		public decimal Price { get; set; }
 		public decimal Total => Price * Quantity;
-	}
+        public string Color { get; set; }
+        public string Size { get; set; }
+    }
 }

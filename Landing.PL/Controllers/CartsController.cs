@@ -148,52 +148,57 @@ namespace Landing.PL.Controllers
 
 		[HttpPost]
 
-		public async Task<IActionResult> AddToCart(int productId, int quantity)
-		{
-			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-			if (userId == null)
-			{
-				
-				return Json(new { redirected = true, loginUrl = Url.Action("Login", "Account") });
-			}
+        public async Task<IActionResult> AddToCart(int productId, int quantity, string color, string size)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            if (userId == null)
+            {
+                return Json(new { redirected = true, loginUrl = Url.Action("Login", "Account") });
+            }
 
-			
-			var cart = await context.Carts
-				.Include(c => c.CartItems)
-				.FirstOrDefaultAsync(c => c.UserId == userId && c.IsActive);
+            var cart = await context.Carts
+                .Include(c => c.CartItems)
+                .FirstOrDefaultAsync(c => c.UserId == userId && c.IsActive);
 
-			if (cart == null)
-			{
-				cart = new Cart { UserId = userId, IsActive = true, CartItems = new List<CartItem>() };
-				context.Carts.Add(cart);
-			}
+            if (cart == null)
+            {
+                cart = new Cart { UserId = userId, IsActive = true, CartItems = new List<CartItem>() };
+                context.Carts.Add(cart);
+            }
 
-			
-			var cartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId);
-			if (cartItem != null)
-			{
-				cartItem.Quantity += 1;
-			}
-			else
-			{
-				var product = await context.Products.FindAsync(productId);
-				if (product == null)
-				{
-					return NotFound();
-				}
+           
+            var cartItem = cart.CartItems.FirstOrDefault(ci => ci.ProductId == productId && ci.Color == color && ci.Size == size);
+            if (cartItem != null)
+            {
+                cartItem.Quantity += quantity;  
+            }
+            else
+            {
+                var product = await context.Products.FindAsync(productId);
+                if (product == null)
+                {
+                    return NotFound();
+                }
 
-				cartItem = new CartItem { ProductId = productId, Quantity = quantity, Price = product.Price };
-				cart.CartItems.Add(cartItem);
-			}
+              
+                cartItem = new CartItem
+                {
+                    ProductId = productId,
+                    Quantity = quantity,
+                    Price = product.Price,
+                    Color = color,
+                    Size = size
+                };
+                cart.CartItems.Add(cartItem);
+            }
 
-			await context.SaveChangesAsync();
+            await context.SaveChangesAsync();
 
-			
-			var uniqueItemCount = cart.CartItems.Count;
-			return Json(new { redirected = false, success = true, itemCount = uniqueItemCount });
-		}
+            var uniqueItemCount = cart.CartItems.Count;
+            return Json(new { redirected = false, success = true, itemCount = uniqueItemCount });
+        }
 
-		[HttpGet]
+        [HttpGet]
 		public async Task<IActionResult> GetUniqueItemCount()
 		{
 			var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

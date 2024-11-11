@@ -12,7 +12,7 @@ namespace Landing.PL.Models.ViewModel
         public string Email { get; set; }
         [Required(ErrorMessage = "Enter Password")]
         [DataType(DataType.Password)]
-        [MinLength(8)]
+        [MinLength(8,ErrorMessage = "Password must be at least 8 character")]
         public string Password { get; set; }
         public bool RememberMe { get; set; }
         

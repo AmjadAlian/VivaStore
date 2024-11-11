@@ -15,7 +15,9 @@ namespace VivaStore.DAL.Models
         public int Stock { get; set; }
         public string ImgName { get; set; }
 		public List<string>? AdditionalImgNames { get; set; } = new List<string>();
-		public bool IsActive { get; set; }
+        public List<string>? Colors { get; set; } = new List<string>();
+        public List<string>? Sizes { get; set; } = new List<string>();
+        public bool IsActive { get; set; }
 
         public bool IsDeleted { get; set; }
         public DateTime CreatedAt { get; set; }

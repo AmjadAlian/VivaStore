@@ -8,7 +8,7 @@ using VivaStore.PL.Areas.Dashboard.ViewModels;
 namespace VivaStore.PL.Areas.Dashboard.Controllers
 {
     [Area("Dashboard")]
-    [Authorize(Roles = "Admin,superAdmin")]
+    [Authorize(Roles = "Admin,SuperAdmin")]
     public class OrdersController : Controller
     {
         private readonly ApplicationDbContext context;

@@ -18,7 +18,7 @@ namespace Landing.PL.Models.ViewModel
 
         [Required(ErrorMessage = "Confirm Password")]
         [DataType(DataType.Password)]
-        [Compare(nameof(Password))]
+        [Compare(nameof(Password),ErrorMessage = "Password not match")]
         public string ConfirmPassword { get; set; }
     }
 }

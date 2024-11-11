@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VivaStore.DAL.Data;
 
@@ -11,9 +12,11 @@ using VivaStore.DAL.Data;
 namespace Landing.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241110225802_addUsers")]
+    partial class addUsers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,19 +54,19 @@ namespace Landing.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "1b2e4e7c-190e-4342-9e92-fc706624e801",
+                            Id = "de40f5e6-0799-4677-af9e-28b45fe45ba4",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "45c0af36-a3bd-438d-bde2-09ac5f4a587a",
+                            Id = "f4bf8018-b5f6-4d14-abf8-65e10cb01a83",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "a9ada7ed-04bb-4769-b915-25beb8693637",
+                            Id = "8ab128be-c899-4151-8623-468e46ffdca8",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         });
@@ -160,18 +163,18 @@ namespace Landing.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "5cec6c18-44b8-4eb0-9e50-5db9846ce691",
-                            RoleId = "1b2e4e7c-190e-4342-9e92-fc706624e801"
+                            UserId = "c0b9f84f-8288-4b0b-98eb-a652a0ab9e90",
+                            RoleId = "de40f5e6-0799-4677-af9e-28b45fe45ba4"
                         },
                         new
                         {
-                            UserId = "b4cb21d1-3739-4005-afd0-34ea12e97980",
-                            RoleId = "45c0af36-a3bd-438d-bde2-09ac5f4a587a"
+                            UserId = "556f9674-bc54-4217-90ed-9a628c1aa5d4",
+                            RoleId = "f4bf8018-b5f6-4d14-abf8-65e10cb01a83"
                         },
                         new
                         {
-                            UserId = "7d50ce81-1d5c-426d-b759-52767fc83c9b",
-                            RoleId = "a9ada7ed-04bb-4769-b915-25beb8693637"
+                            UserId = "f6be4e2d-b6da-497e-b09e-4088f2bb45ce",
+                            RoleId = "8ab128be-c899-4151-8623-468e46ffdca8"
                         });
                 });
 
@@ -272,49 +275,49 @@ namespace Landing.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "5cec6c18-44b8-4eb0-9e50-5db9846ce691",
+                            Id = "c0b9f84f-8288-4b0b-98eb-a652a0ab9e90",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "ec2fa73d-753d-4a9b-b50e-a1cfdff92a52",
+                            ConcurrencyStamp = "b47ef8d9-9602-450e-a6bf-11aeea5eb6b2",
                             Email = "user@outlook.sa",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@OUTLOOK.SA",
                             NormalizedUserName = "USER@OUTLOOK.SA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEEqvFuNW4+Ew5yFcNiUHhN3+qUieTHnEJsmmTzq2wAbjCsFJhDFxLWHIoj8CwDd1tA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEOm6ZQHJ071tHewsvCfXH1njRpzCTqDbzC/LvAKaA8MtqOQr8LV7Dah0YHVVrS6m2A==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "f1f0013e-7d0d-4ff4-9199-b495f6b43226",
+                            SecurityStamp = "583460a4-e4b2-46fc-b78f-52461a631d4f",
                             TwoFactorEnabled = false,
                             UserName = "user@outlook.sa"
                         },
                         new
                         {
-                            Id = "b4cb21d1-3739-4005-afd0-34ea12e97980",
+                            Id = "556f9674-bc54-4217-90ed-9a628c1aa5d4",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "60d8a620-6f6a-4486-8c9d-50d2988d954b",
+                            ConcurrencyStamp = "5b96c652-8c51-4a99-af8a-3de9bd2a60a1",
                             Email = "admin@outlook.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@OUTLOOK.COM",
                             NormalizedUserName = "ADMIN@OUTLOOK.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEIg1D6ubYttC6rfgLDB/2JFCqijzL1IqmA65M4qIrAwvHGfKj6jGw9vE9Pntm5tz2w==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEPIxCx93nMDaOOpn+CSbRcv2afshmYliPtFMk7cNEoNJsBfPQT4OTjONg87YFvq3YQ==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1a28c259-a1b0-4ad9-94d1-457de73f8396",
+                            SecurityStamp = "ed322223-8f12-4a7b-90a6-fa809185f365",
                             TwoFactorEnabled = false,
                             UserName = "admin@outlook.com"
                         },
                         new
                         {
-                            Id = "7d50ce81-1d5c-426d-b759-52767fc83c9b",
+                            Id = "f6be4e2d-b6da-497e-b09e-4088f2bb45ce",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "27d88e2c-d5e7-4190-b63a-a97fc74ac256",
+                            ConcurrencyStamp = "bcb93629-6c86-4c50-abd5-a2d1061c68c5",
                             Email = "superadmin@outlook.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@OUTLOOK.COM",
                             NormalizedUserName = "SUPERADMIN@OUTLOOK.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEH1Vvp8ryE5Bb7Jy/AaV4G/rJBkayvUYnJYhjK3bq4S1jVXuU45pbyJJFfmoPcwiJQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB8uTvvqyCfx3kk2SYeOKUyvZ6revFllrk9/r4DuaCfBsVO/ZAvT9mb2ise6xP1PDw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "45b7f663-b183-4af0-9810-b47c9e316aa7",
+                            SecurityStamp = "1cbe66fa-5ea8-4a11-a605-e87a4a215580",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@outlook.com"
                         });
@@ -356,9 +359,6 @@ namespace Landing.DAL.Migrations
                     b.Property<int>("CartId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Color")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
 
@@ -367,9 +367,6 @@ namespace Landing.DAL.Migrations
 
                     b.Property<int>("Quantity")
                         .HasColumnType("int");
-
-                    b.Property<string>("Size")
-                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -503,9 +500,6 @@ namespace Landing.DAL.Migrations
                     b.Property<int?>("CategoryId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Colors")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("datetime2");
 
@@ -529,9 +523,6 @@ namespace Landing.DAL.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18,2)");
-
-                    b.Property<string>("Sizes")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Stock")
                         .HasColumnType("int");

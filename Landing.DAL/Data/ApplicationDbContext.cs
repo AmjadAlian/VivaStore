@@ -34,7 +34,7 @@ namespace VivaStore.DAL.Data
                 NormalizedEmail = "ADMIN@OUTLOOK.COM",
                 EmailConfirmed = true
             };
-            admin.PasswordHash = hasher.HashPassword(admin, "Amjad123//");
+            admin.PasswordHash = hasher.HashPassword(admin, "Amjad@123");
             var superAdmin = new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
@@ -44,7 +44,7 @@ namespace VivaStore.DAL.Data
                 NormalizedEmail = "SUPERADMIN@OUTLOOK.COM",
                 EmailConfirmed = true
             };
-            superAdmin.PasswordHash = hasher.HashPassword(superAdmin, "Amjad123//");
+            superAdmin.PasswordHash = hasher.HashPassword(superAdmin, "Amjad@123");
             var user = new ApplicationUser
             {
                 Id = Guid.NewGuid().ToString(),
@@ -54,7 +54,7 @@ namespace VivaStore.DAL.Data
                 NormalizedEmail = "USER@OUTLOOK.SA",
                 EmailConfirmed = true
             };
-            user.PasswordHash = hasher.HashPassword(user, "Amjad123//");
+            user.PasswordHash = hasher.HashPassword(user, "Amjad@123");
 
             builder.Entity<ApplicationUser>().HasData(user, admin, superAdmin);
             builder.Entity<IdentityUserRole<string>>().HasData(

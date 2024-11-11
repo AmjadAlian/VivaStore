@@ -123,7 +123,7 @@ namespace Landing.PL.Controllers
 		}
 		public IActionResult GetProductDetails(int id)
 		{
-			var product = context.Products.Find(id); // استبدل `_productService` بالطريقة المناسبة لجلب المنتج
+			var product = context.Products.Find(id); 
 			if (product == null)
 				return NotFound();
 
@@ -133,7 +133,8 @@ namespace Landing.PL.Controllers
 				Name = product.Name,
 				Price = product.Price,
 				Description = product.Description,
-				ImgName = product.ImgName // تأكد من وجود رابط الصورة
+				ImgName = product.ImgName 
+				
 			};
 
 			return Json(productVM);

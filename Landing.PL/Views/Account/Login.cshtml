@@ -17,7 +17,9 @@
         .forgotPassword a{
             color:#222;
         }
-        
+        span{
+            color:red;
+        }
     </style>
 
 
@@ -35,6 +37,7 @@
                 <div class="login__box-input">
                     <input asp-for="Email"  class="login__input"  placeholder=" ">
                     <label asp-for="Email"  class="login__label">Email</label>
+                    <span class=" pt-3" asp-validation-for="Email"></span>
                 </div>
             </div>
 
@@ -42,10 +45,14 @@
                 <i class="ri-lock-2-line login__icon"></i>
 
                 <div class="login__box-input">
-                    <input asp-for=Password class="login__input"  placeholder=" ">
+
+                    <input  asp-for=Password class="login__input"  placeholder=" ">
                     <label asp-for="Password" class="login__label">Password</label>
+                    <span class=" pt-3" asp-validation-for="Password"></span>
                     <i class="ri-eye-off-line login__eye" id="login-eye"></i>
+                    
                 </div>
+
             </div>
         </div>
 
