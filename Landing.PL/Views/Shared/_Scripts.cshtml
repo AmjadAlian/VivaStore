@@ -109,7 +109,7 @@
 			url: '/Carts/GetUniqueItemCount',
 			type: 'GET',
 			success: function (response) {
-				$('#cartItems').attr('data-notify', response.itemCount);
+				$('.cartItems').attr('data-notify', response.itemCount);
 			},
 			error: function () {
 				console.error("Error retrieving cart item count.");
@@ -124,4 +124,58 @@
 <!--===============================================================================================-->
 <script src="~/js/slick-custom.js"></script>
 <script src="~/js/main.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+
+<script>
+	function loadCartItems() {
+		$.ajax({
+			url: '/Carts/GetCartItems', // رابط الـ Action Method
+			method: 'GET',
+			success: function (response) {
+				if (response.success) {
+					const cartItemsContainer = $(".header-cart-wrapitem");
+					const totalContainer = $(".header-cart-total");
+
+					// تفريغ العناصر القديمة
+					cartItemsContainer.empty();
+
+					response.items.forEach(item => {
+						if (item.ProductImage && item.ProductName && item.ProductPrice && item.Quantity) {
+							const cartItemHTML = `
+		  <li class="header-cart-item flex-w flex-t m-b-12">
+			<div class="header-cart-item-img">
+			  <img src="/images/${item.ProductImage}" alt="${item.ProductName}">
+			</div>
+			<div class="header-cart-item-txt p-t-8">
+			  <a href="#" class="header-cart-item-name m-b-18 hov-cl1 trans-04">
+				${item.ProductName}
+			  </a>
+			  <span class="header-cart-item-info">
+				${item.Quantity} x $${item.ProductPrice.toFixed(2)}
+			  </span>
+			</div>
+		  </li>`;
+							cartItemsContainer.append(cartItemHTML);
+						} else {
+							console.warn('Item missing required fields:', item);
+						}
+					});
+
+					// تحديث الإجمالي
+				
+				}
+			},
+			error: function () {
+				alert("Error loading cart items. Please try again.");
+			}
+		});
+	}
+
+	// استدعاء الدالة عند فتح الـ Sidebar
+	$(".js-panel-cart").on("click", function () {
+		loadCartItems();
+	});
+
+</script>

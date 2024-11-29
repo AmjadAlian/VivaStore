@@ -1,56 +1,96 @@
-﻿@section Header{
+﻿@section Header {
     Create
 }
 @model ProductFormVM
 
 <div class="col-md-12">
-    <div class="card card-primary" bis_skin_checked="1">
-        <div class="card-header" bis_skin_checked="1">
+    <div class="card card-primary">
+        <div class="card-header">
             <h3 class="card-title">Quick Example</h3>
         </div>
         <form asp-area="dashboard" asp-controller="Products" asp-action="Create" enctype="multipart/form-data">
-            <div class="card-body" bis_skin_checked="1">
-                <div class="form-group" bis_skin_checked="1">
+            <div class="card-body">
+                <div class="form-group">
                     <label asp-for="Name"></label>
                     <input asp-for="Name" class="form-control" placeholder="Enter Name">
+                    <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
-                <div class="form-group" bis_skin_checked="1">
+
+                <div class="form-group">
                     <label asp-for="Description"></label>
                     <input asp-for="Description" class="form-control textarea" placeholder="Description">
                 </div>
-                <div class="form-group" bis_skin_checked="1">
+
+                <div class="form-group">
                     <label asp-for="Stock"></label>
                     <input asp-for="Stock" class="form-control" placeholder="In Stock">
+                    <span asp-validation-for="Stock" class="text-danger"></span>
                 </div>
-                <div class="form-group" bis_skin_checked="1">
+
+                <div class="form-group">
                     <label asp-for="Price"></label>
                     <input asp-for="Price" class="form-control" placeholder="Price">
+                    <span asp-validation-for="Price" class="text-danger"></span>
                 </div>
-                <div class="form-group" bis_skin_checked="1">
+
+                <div class="form-group">
+                    <label asp-for="DiscountPrice"></label>
+                    <input asp-for="DiscountPrice" class="form-control" placeholder="Enter Discount (if any)">
+                    <span asp-validation-for="DiscountPrice" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
                     <label asp-for="Img"></label>
                     <input asp-for="Img" class="form-control-file">
+                    <span asp-validation-for="Img" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <label asp-for="AdditionalImages">Additional Images</label>
                     <input asp-for="AdditionalImages" type="file" multiple class="form-control-file">
-                    <span asp-validation-for="AdditionalImages" class="text-danger"></span>
                 </div>
-                <div class="form-group" bis_skin_checked="1">
+
+                <div class="form-group">
                     <label asp-for="IsActive"></label>
                     <select asp-for="IsActive" class="form-control">
                         <option value="true">Active</option>
                         <option value="false">Inactive</option>
                     </select>
                 </div>
+
+                <div class="form-group">
+                    <label asp-for="IsNew"></label>
+                    <select asp-for="IsNew" class="form-control">
+                        <option value="true">New</option>
+                        <option value="false">Not New</option>
+                    </select>
+                    <span asp-validation-for="IsNew" class="text-danger"></span>
+                </div>
+
                 <div class="form-group">
                     <label asp-for="CategoryId">Category</label>
                     <select asp-for="CategoryId" asp-items="Model.Categories" class="form-control">
-                        <option value="">-- Select A Category --</option> 
+                        <option value="">-- Select A Category --</option>
                     </select>
                     <span asp-validation-for="CategoryId" class="text-danger"></span>
                 </div>
+
+                <!-- حقل الألوان الديناميكي -->
+                <div class="form-group">
+                    <label>Colors</label>
+                    <div id="colorsContainer"></div>
+                    <button type="button" onclick="addColorField()" class="btn btn-secondary mt-2">Add color</button>
+                </div>
+
+                <!-- حقل الأحجام الديناميكي -->
+                <div class="form-group">
+                    <label>Sizes</label>
+                    <div id="sizesContainer"></div>
+                    <button type="button" onclick="addSizeField()" class="btn btn-secondary mt-2">Add size</button>
+                </div>
             </div>
-            <div class="card-footer d-flex justify-content-between" bis_skin_checked="1">
+
+            <div class="card-footer d-flex justify-content-between">
                 <button type="submit" class="btn btn-primary">Submit</button>
                 <a asp-area="Dashboard" asp-controller="Products" asp-action="Index" class="btn btn-success btn">
                     Back
@@ -60,26 +100,77 @@
     </div>
 </div>
 
-@section scripts{
-    <script src="https://cdn.tiny.cloud/1/nz03qoe62zt6xuijqoxkws3c80s3bwjmbqj83xwhjn35f8f4/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-        tinymce.init({
-            selector: '.textarea',
-            toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-            plugins: [
-                // Core editing features
-                'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
-                // Your account includes a free trial of TinyMCE premium features
-                // Try the most popular premium features until Nov 14, 2024:
-                'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
-                // Early access to document converters
-                'importword', 'exportword', 'exportpdf'
-            ],
-        });
-    </script>
-
+@section scripts {
    
+
+        <script src="https://cdn.tiny.cloud/1/nz03qoe62zt6xuijqoxkws3c80s3bwjmbqj83xwhjn35f8f4/tinymce/7/tinymce.min.js" referrerpolicy = "origin" ></script>
+    <script>
+            tinymce.init({
+                selector: '.textarea',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                plugins: [
+                    'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
+                    'checklist', 'mediaembed', 'casechange', 'export', 'formatpainter', 'pageembed', 'a11ychecker', 'tinymcespellchecker', 'permanentpen', 'powerpaste', 'advtable', 'advcode', 'editimage', 'advtemplate', 'ai', 'mentions', 'tinycomments', 'tableofcontents', 'footnotes', 'mergetags', 'autocorrect', 'typography', 'inlinecss', 'markdown',
+                    'importword', 'exportword', 'exportpdf'
+                ],
+            });
+
+        // دالة لإضافة حقل لون جديد مع زر حذف
+        function addColorField() {
+            var container = document.getElementById("colorsContainer");
+
+            // إنشاء الحاوية للحقل وزر الحذف
+            var fieldContainer = document.createElement("div");
+            fieldContainer.classList.add("d-flex", "align-items-center", "mt-2");
+
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "Colors";
+            input.classList.add("form-control", "me-2");  // إضافة مسافة بين الحقل وزر الحذف
+            input.placeholder = "Enter a color";
+
+            // زر الحذف
+            var deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.classList.add("btn", "btn-danger");
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = function () {
+                container.removeChild(fieldContainer);
+            };
+
+            // إضافة الحقل وزر الحذف إلى الحاوية
+            fieldContainer.appendChild(input);
+            fieldContainer.appendChild(deleteButton);
+
+            // إضافة الحاوية إلى container
+            container.appendChild(fieldContainer);
+        }
+
+        // دالة لإضافة حقل حجم جديد مع زر حذف
+        function addSizeField() {
+            var container = document.getElementById("sizesContainer");
+
+            var fieldContainer = document.createElement("div");
+            fieldContainer.classList.add("d-flex", "align-items-center", "mt-2");
+
+            var input = document.createElement("input");
+            input.type = "text";
+            input.name = "Sizes";
+            input.classList.add("form-control", "me-2");
+            input.placeholder = "Enter a size";
+
+            var deleteButton = document.createElement("button");
+            deleteButton.type = "button";
+            deleteButton.classList.add("btn", "btn-danger");
+            deleteButton.textContent = "Delete";
+            deleteButton.onclick = function () {
+                container.removeChild(fieldContainer);
+            };
+
+            fieldContainer.appendChild(input);
+            fieldContainer.appendChild(deleteButton);
+
+            container.appendChild(fieldContainer);
+        }
+    </script>
 }
-
-
-

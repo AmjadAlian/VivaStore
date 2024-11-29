@@ -208,11 +208,11 @@ else
 									<option value="PayPal">PayPal</option>
 									<option value="Cash on Delivery">Cash on Delivery</option>
 								</select>
-								<span asp-validation-for="PaymentMethod"></span>
-							</div>
 							
+							</div>
+							<span asp-validation-for="PaymentMethod" class="text-danger m-b-12"></span>
 							<!-- Shipping Address -->
-							<div class="bor8 bg0 m-b-12">
+							<div class="bor8 bg0 m-b-12 mt-3">
 								
 								<input asp-for="ShippingAddress" class="stext-111 cl8 plh3 size-111 p-lr-15" placeholder="Shipping Address">
 								

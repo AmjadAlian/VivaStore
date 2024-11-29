@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using System.Reflection.Emit;
 using VivaStore.DAL.Models;
 
 namespace VivaStore.DAL.Data
@@ -13,6 +14,11 @@ namespace VivaStore.DAL.Data
         }
         protected override void OnModelCreating(ModelBuilder builder)
         {
+            builder.Entity<Category>()
+        .HasMany(c => c.Products)
+        .WithOne(p => p.Category)
+        .OnDelete(DeleteBehavior.Cascade); // حذف تسلسلي
+
 
             base.OnModelCreating(builder);
             var userRoleId = Guid.NewGuid().ToString();

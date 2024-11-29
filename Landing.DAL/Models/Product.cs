@@ -18,10 +18,11 @@ namespace VivaStore.DAL.Models
         public List<string>? Colors { get; set; } = new List<string>();
         public List<string>? Sizes { get; set; } = new List<string>();
         public bool IsActive { get; set; }
-
+        public bool IsNew { get; set; }
+        public decimal DiscountPrice { get; set; }
         public bool IsDeleted { get; set; }
         public DateTime CreatedAt { get; set; }
         public int? CategoryId { get; set; }
-        public Category Category { get; set; }
+        public Category Category { get; set;}
     }
 }

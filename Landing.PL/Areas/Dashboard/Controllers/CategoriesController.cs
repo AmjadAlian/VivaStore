@@ -89,20 +89,34 @@ namespace VivaStore.PL.Areas.Dashboard.Controllers
             return RedirectToAction(nameof(Index));
 
         }
-        [HttpPost]
+     
         
-        public IActionResult Delete (int id)
-        {
-            var category = context.Categories.Find(id);
-            if(category == null)
-            {
-                return RedirectToAction(nameof(Index)); 
-            }
-            FilesSettings.DeleteFile(category.ImgName,"imgs");
-            context.Categories.Remove(category);
-            context.SaveChanges();
-            return Ok(new {message="Category Deleted Successfully"});
-        }
+    public IActionResult Delete(int id)
+{
+   
+    var category = context.Categories
+        .Include(c => c.Products) 
+        .FirstOrDefault(c => c.Id == id);
+
+    if (category == null)
+    {
+        return RedirectToAction(nameof(Index));
+    }
+
+  
+    if (category.Products != null && category.Products.Any())
+    {
+        context.Products.RemoveRange(category.Products);
+    }
+
+   
+    FilesSettings.DeleteFile(category.ImgName, "imgs");
+
+    context.Categories.Remove(category);
+    context.SaveChanges();
+
+    return Ok(new { message = "Category Deleted Successfully" });
+}
       
     }
 }

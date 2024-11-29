@@ -29,60 +29,95 @@
 		.myModal {
 			margin-top: 60px;
 		}
+
+		.label-discount::before {
+			content: attr(data-discount);
+			font-family: Montserrat-Regular;
+			font-size: 12px;
+			color: #fff;
+			line-height: 1.2;
+			display: -webkit-box;
+			display: -webkit-flex;
+			display: -moz-box;
+			display: -ms-flexbox;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			position: absolute;
+			min-width: 50px;
+			height: 22px;
+			border-radius: 11px;
+			padding: 0 6px;
+			background-color: red;
+			top: 42px;
+			right: 12px;
+			z-index: 1000;
+		}
+
+		.orginalPrice {
+			text-decoration: line-through;
+			color: red;
+			margin-left: 4px;
+			margin-top: 2px;
+			font-size: 12px;
+		}
 	</style>
 }
 
-	<!-- Product -->
-	<div class="productSection bg0 m-t-23 p-b-140">
-		<div class="container">
+<!-- Product Section -->
+<section id="Product" class="bg0 p-t-23 p-b-130 productSection">
+	<div class="container">
 		<div class="p-b-10">
 			<h3 class="ltext-103 cl5">
 				Product Overview
 			</h3>
 		</div>
-			<div class="flex-w flex-sb-m p-b-52">
-				<div class="flex-w flex-l-m filter-tope-group m-tb-10">
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 how-active1" data-filter="*">
-						All Products
-					</button>
 
-				@foreach (var category in Model.Categories)
+		<!-- Filter by Category -->
+		<div class="flex-w flex-sb-m p-b-52">
+			<div class="flex-w flex-l-m filter-tope-group m-tb-10">
+				<a href="@Url.Action("Index", new { categoryId = (int?)null })#Product" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5  @(Model.SelectedCategoryId == null ? "how-active1" : "")">
+					All Products
+				</a>
+				@foreach (var category in Model.Categories.Take(5).OrderBy(c => c.Order).Where(c => c.IsActive))
 				{
-					<button class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5" data-filter=".@category.Name">
+					<a href="@Url.Action("Index", new { categoryId = category.Id })#Product" class="stext-106 cl6 hov1 bor3 trans-04 m-r-32 m-tb-5 @(Model.SelectedCategoryId == category.Id ? "how-active1" : "")">
 						@category.Title
-					</button>
+					</a>
 				}
-				
+			</div>
+
+
+			<div class="flex-w flex-c-m m-tb-10">
+				<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
+					<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
+					<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+					Filter
 				</div>
 
-				<div class="flex-w flex-c-m m-tb-10">
-					<div class="flex-c-m stext-106 cl6 size-104 bor4 pointer hov-btn3 trans-04 m-r-8 m-tb-4 js-show-filter">
-						<i class="icon-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-filter-list"></i>
-						<i class="icon-close-filter cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						Filter
-					</div>
-
-					<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
-						<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
-						<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
-						Search
-					</div>
+				<div class="flex-c-m stext-106 cl6 size-105 bor4 pointer hov-btn3 trans-04 m-tb-4 js-show-search">
+					<i class="icon-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-search"></i>
+					<i class="icon-close-search cl2 m-r-6 fs-15 trans-04 zmdi zmdi-close dis-none"></i>
+					Search
 				</div>
+			</div>
 
-				<!-- Search product -->
-				<div class="dis-none panel-search w-full p-t-10 p-b-15">
-					<div class="bor8 dis-flex p-l-15">
-						<button class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
+			<!-- Search product -->
+			<div class="dis-none panel-search w-full p-t-10 p-b-15">
+				<div class="bor8 dis-flex p-l-15">
+					<form method="get" class="flex-w flex-l-m filter-tope-group m-tb-10 w-100" action="@Url.Action("Index")#Product">
+
+						<input type="text" name="searchTerm" value="@Model.SearchTerm" placeholder="Search" class="mtext-107 cl2 size-114 plh2 p-r-15">
+						<button type="submit" class="size-113 flex-c-m fs-16 cl2 hov-cl1 trans-04">
 							<i class="zmdi zmdi-search"></i>
 						</button>
-
-						<input class="mtext-107 cl2 size-114 plh2 p-r-15" type="text" name="search-product" placeholder="Search">
-					</div>
+					</form>
 				</div>
+			</div>
 
-				<!-- Filter -->
-				<div class="dis-none panel-filter w-full p-t-10">
-					<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
+			<!-- Filter -->
+			<div class="dis-none panel-filter w-full p-t-10">
+				<div class="wrap-filter flex-w bg6 w-full p-lr-40 p-t-27 p-lr-15-sm">
 					<div class="filter-col1 p-r-15 p-b-27">
 						<div class="mtext-102 cl2 p-b-15">
 							Sort By
@@ -100,158 +135,157 @@
 						</ul>
 					</div>
 
-						<div class="filter-col2 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Price
-							</div>
-
-							<ul>
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										All
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$0.00 - $50.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$50.00 - $100.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$100.00 - $150.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$150.00 - $200.00
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<a href="#" class="filter-link stext-106 trans-04">
-										$200.00+
-									</a>
-								</li>
-							</ul>
+					<div class="filter-col2 p-r-15 p-b-27">
+						<div class="mtext-102 cl2 p-b-15">
+							Price
 						</div>
 
-						<div class="filter-col3 p-r-15 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Color
-							</div>
+						<ul>
+							<li class="p-b-6">
+								<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+									All
+								</a>
+							</li>
 
-							<ul>
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #222;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
+							<li class="p-b-6">
+								<a href="#" class="filter-link stext-106 trans-04">
+									$0.00 - $50.00
+								</a>
+							</li>
 
-									<a href="#" class="filter-link stext-106 trans-04">
-										Black
-									</a>
-								</li>
+							<li class="p-b-6">
+								<a href="#" class="filter-link stext-106 trans-04">
+									$50.00 - $100.00
+								</a>
+							</li>
 
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
+							<li class="p-b-6">
+								<a href="#" class="filter-link stext-106 trans-04">
+									$100.00 - $150.00
+								</a>
+							</li>
 
-									<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
-										Blue
-									</a>
-								</li>
+							<li class="p-b-6">
+								<a href="#" class="filter-link stext-106 trans-04">
+									$150.00 - $200.00
+								</a>
+							</li>
 
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
+							<li class="p-b-6">
+								<a href="#" class="filter-link stext-106 trans-04">
+									$200.00+
+								</a>
+							</li>
+						</ul>
+					</div>
 
-									<a href="#" class="filter-link stext-106 trans-04">
-										Grey
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Green
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
-										<i class="zmdi zmdi-circle"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										Red
-									</a>
-								</li>
-
-								<li class="p-b-6">
-									<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
-										<i class="zmdi zmdi-circle-o"></i>
-									</span>
-
-									<a href="#" class="filter-link stext-106 trans-04">
-										White
-									</a>
-								</li>
-							</ul>
+					<div class="filter-col3 p-r-15 p-b-27">
+						<div class="mtext-102 cl2 p-b-15">
+							Color
 						</div>
 
-						<div class="filter-col4 p-b-27">
-							<div class="mtext-102 cl2 p-b-15">
-								Tags
-							</div>
+						<ul>
+							<li class="p-b-6">
+								<span class="fs-15 lh-12 m-r-6" style="color: #222;">
+									<i class="zmdi zmdi-circle"></i>
+								</span>
 
-							<div class="flex-w p-t-4 m-r--5">
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Fashion
+								<a href="#" class="filter-link stext-106 trans-04">
+									Black
 								</a>
+							</li>
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Lifestyle
-								</a>
+							<li class="p-b-6">
+								<span class="fs-15 lh-12 m-r-6" style="color: #4272d7;">
+									<i class="zmdi zmdi-circle"></i>
+								</span>
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Denim
+								<a href="#" class="filter-link stext-106 trans-04 filter-link-active">
+									Blue
 								</a>
+							</li>
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Streetstyle
-								</a>
+							<li class="p-b-6">
+								<span class="fs-15 lh-12 m-r-6" style="color: #b3b3b3;">
+									<i class="zmdi zmdi-circle"></i>
+								</span>
 
-								<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
-									Crafts
+								<a href="#" class="filter-link stext-106 trans-04">
+									Grey
 								</a>
-							</div>
+							</li>
+
+							<li class="p-b-6">
+								<span class="fs-15 lh-12 m-r-6" style="color: #00ad5f;">
+									<i class="zmdi zmdi-circle"></i>
+								</span>
+
+								<a href="#" class="filter-link stext-106 trans-04">
+									Green
+								</a>
+							</li>
+
+							<li class="p-b-6">
+								<span class="fs-15 lh-12 m-r-6" style="color: #fa4251;">
+									<i class="zmdi zmdi-circle"></i>
+								</span>
+
+								<a href="#" class="filter-link stext-106 trans-04">
+									Red
+								</a>
+							</li>
+
+							<li class="p-b-6">
+								<span class="fs-15 lh-12 m-r-6" style="color: #aaa;">
+									<i class="zmdi zmdi-circle-o"></i>
+								</span>
+
+								<a href="#" class="filter-link stext-106 trans-04">
+									White
+								</a>
+							</li>
+						</ul>
+					</div>
+
+					<div class="filter-col4 p-b-27">
+						<div class="mtext-102 cl2 p-b-15">
+							Tags
+						</div>
+
+						<div class="flex-w p-t-4 m-r--5">
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Fashion
+							</a>
+
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Lifestyle
+							</a>
+
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Denim
+							</a>
+
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Streetstyle
+							</a>
+
+							<a href="#" class="flex-c-m stext-107 cl6 size-301 bor7 p-lr-15 hov-tag1 trans-04 m-r-5 m-b-5">
+								Crafts
+							</a>
 						</div>
 					</div>
 				</div>
 			</div>
+		</div>
 
-			<div class="row isotope-grid">
+		<!-- Products Grid -->
+		<div class="row isotope-grid">
 			@foreach (var item in Model.Products.OrderBy(o => o.Name).Where(p => p.IsActive))
 			{
 				<div class="col-sm-6 col-md-4 col-lg-3 p-b-35 isotope-item @item.CategoryName">
-					<!-- Block2 -->
 					<div class="block2">
-						<div class="block2-pic hov-img0 label-new" data-label="New">
+						<div class="block2-pic hov-img0  @(item.DiscountPrice > 0 ? "label-discount":"")   @(item.IsNew?"label-new":"")" @(item.DiscountPercentage > 0 ? $"data-discount={item.DiscountPercentage}%" : "") @(item.IsNew ? "data-label= New" : "")>
 							<img height="390" src="./files/imgs/@item.ImgName" alt="IMG-PRODUCT">
-
 							<button onclick="openQuickViewModal(@item.Id)" class="block2-btn flex-c-m stext-103 cl2 size-102 bg0 bor2 hov-btn1 p-lr-15 trans-04 js-show-modal1">
 								Quick View
 							</button>
@@ -259,37 +293,67 @@
 
 						<div class="block2-txt flex-w flex-t p-t-14">
 							<div class="block2-txt-child1 flex-col-l ">
-								<a asp-action="ProductInfo" asp-controller="Product" asp-route-id="@item.Id" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
+								<a href="product-detail.html" class="stext-104 cl4 hov-cl1 trans-04 js-name-b2 p-b-6">
 									@item.Name
 								</a>
 
-								<span class="stext-105 cl3">
-									@item.Price
-								</span>
-							</div>
+								@if (item.DiscountPercentage > 0)
+								{
+									<div class="d-flex">
 
+										<span class="stext-105 cl3 discountPrice">
+											@(item.Price - item.DiscountPrice)
+										</span>
+										<span class="stext-105 cl3 orginalPrice">
+											@item.Price
+										</span>
+									</div>
+								}
+								else
+								{
+									<span class="stext-105 cl3 ">
+										@item.Price
+									</span>
+								}
+
+							</div>
 							<div class="block2-txt-child2 flex-r p-t-3">
 								<a href="#" class="btn-addwish-b2 dis-block pos-relative js-addwish-b2">
-									<img class="icon-heart1 dis-block trans-04" src="~/images/icons/icon-heart-01.png" alt="ICON">
-									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="~/images/icons/icon-heart-02.png" alt="ICON">
+									<img class="icon-heart1 dis-block trans-04" src="images/icons/icon-heart-01.png" alt="ICON">
+									<img class="icon-heart2 dis-block trans-04 ab-t-l" src="images/icons/icon-heart-02.png" alt="ICON">
 								</a>
 							</div>
 						</div>
 					</div>
 				</div>
 			}
+		</div>
 
-			</div>
-
-			<!-- Load more -->
-			<div class="flex-c-m flex-w w-full p-t-45">
-				<a href="#" class="flex-c-m stext-101 cl5 size-103 bg2 bor1 hov-btn1 p-lr-15 trans-04">
-					Load More
+		<!-- Pagination -->
+		<div class="flex-c-m flex-w w-full p-t-38">
+			@if (Model.CurrentPage > 1)
+			{
+				<a href="@Url.Action("Index", new { page = Model.CurrentPage - 1, categoryId = Model.SelectedCategoryId })#Product" class="flex-c-m how-pagination1 trans-04 m-all-7">
+					Back
 				</a>
-			</div>
+			}
+
+			@for (int i = 1; i <= Model.TotalPages; i++)
+			{
+				<a href="@Url.Action("Index", new { page = i, categoryId = Model.SelectedCategoryId })#Product" class="flex-c-m how-pagination1 trans-04 m-all-7 @(i == Model.CurrentPage ? "active-pagination1" : "")">
+					@i
+				</a>
+			}
+
+			@if (Model.CurrentPage < Model.TotalPages)
+			{
+				<a href="@Url.Action("Index", new { page = Model.CurrentPage + 1, categoryId = Model.SelectedCategoryId })#Product" class="flex-c-m how-pagination1 trans-04 m-all-7">
+					Next
+				</a>
+			}
 		</div>
 	</div>
-
+</section>
 
 
 
@@ -346,92 +410,92 @@
 								<div class="size-203 flex-c-m respon6">
 									Size
 								</div>
-
 								<div class="size-204 respon6-next">
 									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
+										<select class="js-select2" name="size-options">
 											<option>Choose an option</option>
-											<option>Size S</option>
-											<option>Size M</option>
-											<option>Size L</option>
-											<option>Size XL</option>
+											<!-- سيتم ملء الأحجام ديناميكيًا هنا -->
 										</select>
 										<div class="dropDownSelect2"></div>
 									</div>
 								</div>
 							</div>
 
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-203 flex-c-m respon6">
-									Color
-								</div>
+						</div>
 
-								<div class="size-204 respon6-next">
-									<div class="rs1-select2 bor8 bg0">
-										<select class="js-select2" name="time">
-											<option>Choose an option</option>
-											<option>Red</option>
-											<option>Blue</option>
-											<option>White</option>
-											<option>Grey</option>
-										</select>
-										<div class="dropDownSelect2"></div>
-									</div>
-								</div>
+						<div class="flex-w flex-r-m p-b-10">
+							<div class="size-203 flex-c-m respon6">
+								Color
 							</div>
-
-							<div class="flex-w flex-r-m p-b-10">
-								<div class="size-204 flex-w flex-m respon6-next">
-									<div class="wrap-num-product flex-w m-r-20 m-tb-10">
-										<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-minus"></i>
-										</div>
-
-										<input class="mtext-104 cl3 txt-center num-product" type="number" id="quantity" name="quantity" value="1">
-
-										<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
-											<i class="fs-16 zmdi zmdi-plus"></i>
-										</div>
-									</div>
-
-									<button onclick="" id="onClick" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
-										Add to cart
-									</button>
+							<div class="size-204 respon6-next">
+								<div class="rs1-select2 bor8 bg0">
+									<select class="js-select2" name="color-options">
+										<option>Choose an option</option>
+										<!-- سيتم ملء الألوان ديناميكيًا هنا -->
+									</select>
+									<div class="dropDownSelect2"></div>
 								</div>
 							</div>
 						</div>
 
-						<!--  -->
-						<div class="flex-w flex-m p-l-100 p-t-40 respon7">
-							<div class="flex-m bor9 p-r-10 m-r-11">
-								<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
-									<i class="zmdi zmdi-favorite"></i>
-								</a>
+						<div class="flex-w flex-r-m p-b-10">
+							<div class="size-204 flex-w flex-m respon6-next">
+								<div class="wrap-num-product flex-w m-r-20 m-tb-10">
+									<div class="btn-num-product-down cl8 hov-btn3 trans-04 flex-c-m">
+										<i class="fs-16 zmdi zmdi-minus"></i>
+									</div>
+
+									<input class="mtext-104 cl3 txt-center num-product" type="number" id="quantity" name="quantity" value="1">
+
+									<div class="btn-num-product-up cl8 hov-btn3 trans-04 flex-c-m">
+										<i class="fs-16 zmdi zmdi-plus"></i>
+									</div>
+								</div>
+
+								<button onclick="" id="onClick" class="flex-c-m stext-101 cl0 size-101 bg1 bor1 hov-btn1 p-lr-15 trans-04 js-addcart-detail">
+									Add to cart
+								</button>
 							</div>
+						</div>
+					</div>
 
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
-								<i class="fa fa-facebook"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
-								<i class="fa fa-twitter"></i>
-							</a>
-
-							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
-								<i class="fa fa-google-plus"></i>
+					<!--  -->
+					<div class="flex-w flex-m p-l-100 p-t-40 respon7">
+						<div class="flex-m bor9 p-r-10 m-r-11">
+							<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 js-addwish-detail tooltip100" data-tooltip="Add to Wishlist">
+								<i class="zmdi zmdi-favorite"></i>
 							</a>
 						</div>
+
+						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Facebook">
+							<i class="fa fa-facebook"></i>
+						</a>
+
+						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Twitter">
+							<i class="fa fa-twitter"></i>
+						</a>
+
+						<a href="#" class="fs-14 cl3 hov-cl1 trans-04 lh-10 p-lr-5 p-tb-2 m-r-8 tooltip100" data-tooltip="Google Plus">
+							<i class="fa fa-google-plus"></i>
+						</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+</div>
 
-	
+
+
+
 
 @section scripts {
+
+
+
 	<script>
+
 		function openQuickViewModal(productId) {
 			const prodId = productId;
 			console.log(prodId);
@@ -440,16 +504,36 @@
 				type: 'GET',
 				data: { id: productId },
 				success: function (data) {
-					
-					$('#modalImage').attr('src', `./files/imgs/${data.imgName}`);     
-					$('#modalName').text(data.name);                  
-					$('#modalPrice').text('$' + data.price);          
-					$('#modalDescription').text(data.description);    
+					// تحديث العناصر بالبيانات المحملة
+					$('#modalImage').attr('src', `./files/imgs/${data.imgName}`);
+					$('#modalName').text(data.name);
+					$('#modalPrice').text('$' + data.price);
+					$('#modalDescription').text(data.description);
 					$('#data-thumbs').attr('data-thumb', `./files/imgs/${data.imgName}`);
 					$('#data-big').attr('href', `./files/imgs/${data.imgName}`);
 					$('#onClick').attr('onclick', `addToCart('${prodId}','${data.name}')`);
 
-					
+					const sizeSelect = $('.size-204.respon6-next select[name="size-options"]');
+					sizeSelect.empty(); // تنظيف القائمة قبل إضافة الأحجام
+					if (data.sizes && Array.isArray(data.sizes) && data.sizes.length > 0) {
+						data.sizes.forEach(size => {
+							sizeSelect.append(new Option(size, size));
+						});
+					} else {
+						sizeSelect.append(new Option("No sizes available", "")); // قيمة افتراضية إذا لم تكن هناك أحجام
+					}
+
+					// تعبئة قائمة الألوان
+					const colorSelect = $('.size-204.respon6-next select[name="color-options"]');
+					colorSelect.empty(); // تنظيف القائمة قبل إضافة الألوان
+					if (data.colors && Array.isArray(data.colors) && data.colors.length > 0) {
+						data.colors.forEach(color => {
+							colorSelect.append(new Option(color, color));
+						});
+					} else {
+						colorSelect.append(new Option("No colors available", "")); // قيمة افتراضية إذا لم تكن هناك ألوان
+					}
+					// عرض الـ modal
 					$('.js-modal1').addClass('show-modal');
 				},
 				error: function () {
@@ -458,14 +542,11 @@
 			});
 		}
 
-		
-		$('.js-hide-modal1').on('click', function () {
-			$('.js-modal1').removeClass('show-modal');
-		});
 
 		function addToCart(productId, productName) {
 			const quantity = parseInt($('#quantity').val());
-
+			const color = $('select[name="color-options"]').val();
+			const size = $('select[name="size-options"]').val();
 			if (isNaN(quantity) || quantity <= 0) {
 				alert("Please enter a valid quantity.");
 				return;
@@ -474,10 +555,10 @@
 			$.ajax({
 				url: '/Carts/AddToCart',
 				type: 'POST',
-				data: { productId: productId, quantity: quantity },
+				data: { productId: productId, quantity: quantity, color: color, size, size },
 				success: function (response) {
 					if (response.redirected) {
-						
+						// Redirect to the login page if not authenticated
 						window.location.href = response.loginUrl;
 						return;
 					}
@@ -492,7 +573,20 @@
 							showConfirmButton: false,
 							timer: 1500
 						});
-						$('#cart-item-count').text(response.itemCount); 
+
+
+						$(document).ready(function () {
+							$.ajax({
+								url: '/Carts/GetUniqueItemCount',
+								type: 'GET',
+								success: function (response) {
+									$('.cartItems').attr('data-notify', response.itemCount);
+								},
+								error: function () {
+									console.error("Error retrieving cart item count.");
+								}
+							});
+						});
 					}
 				},
 				error: function (xhr, status, error) {

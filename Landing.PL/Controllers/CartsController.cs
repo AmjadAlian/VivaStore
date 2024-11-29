@@ -213,6 +213,46 @@ namespace Landing.PL.Controllers
 		}
 
 
+		//for sidebar cart in navbar
+		[HttpGet]
+		public IActionResult GetCartItems()
+		{
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+
+			// التحقق من تسجيل الدخول
+			if (userId == null)
+			{
+				return Json(new { success = false, message = "User not logged in." });
+			}
+
+			// استرجاع السلة
+			var cart = context.Carts
+				.Include(c => c.CartItems)
+				.ThenInclude(ci => ci.Product)
+				.FirstOrDefault(c => c.UserId == userId && c.IsActive);
+
+			if (cart == null || !cart.CartItems.Any())
+			{
+				return Json(new { success = true, items = new List<object>(), total = 0 });
+			}
+
+			var items = cart.CartItems.Select(ci => new
+			{
+				ProductName = ci.Product.Name,
+				ProductPrice = ci.Product.Price , // إضافة قيمة افتراضية إذا كانت فارغة
+				ProductImage = ci.Product.ImgName,
+				Quantity = ci.Quantity,
+				TotalPrice = ci.Quantity *ci.Product.Price  // تعيين القيمة الافتراضية هنا أيضًا
+			}).ToList();
+
+
+			var total = items.Sum(i => i.TotalPrice);
+
+			return Json(new { success = true, items = items });
+		}
+
+
+
 
 
 	}

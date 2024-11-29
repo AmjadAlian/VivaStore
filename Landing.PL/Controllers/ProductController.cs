@@ -19,52 +19,53 @@ namespace Landing.PL.Controllers
 			context = _context;
 			this.mapper = mapper;
 		}
-		public async Task<IActionResult> IndexAsync()
+		public async Task<IActionResult> Index(int page = 1, int? categoryId = null, string searchTerm = "")
 		{
-			var sliderEntities = await context.SliderHome
-		.Where(s => s.IsActive)
-		.OrderBy(s => s.Order)
-		.ToListAsync();
-			var sliderViewModels = mapper.Map<List<SliderHomeVM>>(sliderEntities);
+			const int pageSize = 10;
 
+			IQueryable<Product> productQuery = context.Products
+				.Where(p => p.IsActive)
+				.Include(p => p.Category);
 
-			var productEntities = await context.Products.Where(s => s.IsActive).Include(p => p.Category).ToListAsync();
+			if (!string.IsNullOrEmpty(searchTerm))
+			{
+				productQuery = productQuery.Where(p => p.Name.Contains(searchTerm)); // البحث باستخدام الاسم
+			}
 
+			if (categoryId.HasValue)
+			{
+				productQuery = productQuery.Where(p => p.CategoryId == categoryId.Value);
+			}
+
+			var totalProducts = await productQuery.CountAsync();
+			var totalPages = (int)Math.Ceiling((double)totalProducts / pageSize);
+
+			var productEntities = await productQuery
+				.Skip((page - 1) * pageSize)
+				.Take(pageSize)
+				.ToListAsync();
 			var productViewModels = mapper.Map<List<ProductVM>>(productEntities);
 
+			// استعلام الفئات
 			var CategoryEntities = await context.Categories
-		  .Where(s => s.IsActive)
-		  .OrderBy(s => s.Order)
-		  .ToListAsync();
-
+				.Where(s => s.IsActive)
+				.OrderBy(s => s.Order)
+				.ToListAsync();
 			var CategoryViewModels = mapper.Map<List<CategoryVM>>(CategoryEntities);
+
+			// إعداد الـ ViewModel
 			var homeViewModel = new HomePageViewModel
 			{
-				Sliders = sliderViewModels,
+				
 				Products = productViewModels,
-				Categories = CategoryViewModels
+				Categories = CategoryViewModels,
+				CurrentPage = page,
+				TotalPages = totalPages,
+				SelectedCategoryId = categoryId,
+				SearchTerm = searchTerm
 			};
 
 			return View(homeViewModel);
-			
-		}
-		public async Task<IActionResult> ProductInfo(int id)
-		{
-			
-			var product = await context.Products
-				.Include(p => p.Category)
-				.FirstOrDefaultAsync(p => p.Id == id);
-
-			if (product == null)
-			{
-				return NotFound();
-			}
-
-		
-			var productDetailsVM = mapper.Map<ProductDetailsVM>(product);
-
-			
-			return View(productDetailsVM);
 		}
 
 		[HttpPost]
@@ -133,7 +134,9 @@ namespace Landing.PL.Controllers
 				Name = product.Name,
 				Price = product.Price,
 				Description = product.Description,
-				ImgName = product.ImgName 
+				ImgName = product.ImgName,
+				Colors=product.Colors?? new List<string>(),
+				Sizes=product.Sizes ?? new List<string>(),
 				
 			};
 

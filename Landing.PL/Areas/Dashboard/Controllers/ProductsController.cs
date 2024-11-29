@@ -81,7 +81,9 @@ namespace VivaStore.PL.Areas.Dashboard.Controllers
             {
                 return NotFound();
             }
+
             var productVm = mapper.Map<ProductFormVM>(product);
+         
             productVm.Categories = context.Categories.Select(c => new SelectListItem
             {
                 Value = c.Id.ToString(),

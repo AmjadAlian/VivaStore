@@ -13,7 +13,9 @@ namespace Landing.PL.Models.ViewModel
 		public ProductVM SelectedProduct { get; set; }
 		public int CurrentPage { get; set; } = 1;
 		public int TotalPages { get; set; }
-		public int? SelectedCategoryId { get; set; } // ID الفئة المختارة
+		public int? SelectedCategoryId { get; set; }
+		public string SearchTerm { get; set; } 
+
 	}
 
 }

@@ -132,7 +132,7 @@
                     if (result.isConfirmed) {
                         const id = button.dataset.id;
 
-                        const response = await fetch(`/dashboard/Products/Delete/${id}`, {
+                        const response = await fetch(`/dashboard/Categories/Delete/${id}`, {
                             method: 'POST', headers: {
                                 "Content-Type": "application/json"
                             }
@@ -158,6 +158,7 @@
                         });
                     }
                 });
+
 
 
 

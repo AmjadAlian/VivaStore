@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VivaStore.DAL.Data;
 
@@ -11,9 +12,11 @@ using VivaStore.DAL.Data;
 namespace Landing.DAL.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241112124617_AddIsNewAndDiscountPriceToProduct")]
+    partial class AddIsNewAndDiscountPriceToProduct
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -51,19 +54,19 @@ namespace Landing.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "6675e3af-233b-4fc2-a443-fd18babb3020",
+                            Id = "1c435d63-7883-4d82-889c-4c6316ac2c0b",
                             Name = "User",
                             NormalizedName = "USER"
                         },
                         new
                         {
-                            Id = "add95ad3-3a8c-438e-9f0a-f20b878491e2",
+                            Id = "ecf4e6da-af96-414c-b03c-c924b3ca3084",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
-                            Id = "b14c4944-27bd-4d3f-b897-692b4e607287",
+                            Id = "054106b4-72bd-402c-8d6a-3354009c3c24",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         });
@@ -160,18 +163,18 @@ namespace Landing.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            UserId = "471e92fc-92f8-49cc-a87f-e776109dbcd2",
-                            RoleId = "6675e3af-233b-4fc2-a443-fd18babb3020"
+                            UserId = "fa6f6992-c95b-47a4-ac6f-9e341eb40049",
+                            RoleId = "1c435d63-7883-4d82-889c-4c6316ac2c0b"
                         },
                         new
                         {
-                            UserId = "de177380-f4e0-44ff-8999-8a2b4138df85",
-                            RoleId = "add95ad3-3a8c-438e-9f0a-f20b878491e2"
+                            UserId = "338bfdc8-4be9-4a19-9c60-a65bfae6d124",
+                            RoleId = "ecf4e6da-af96-414c-b03c-c924b3ca3084"
                         },
                         new
                         {
-                            UserId = "7f587113-598f-435d-8449-c33cd94902d7",
-                            RoleId = "b14c4944-27bd-4d3f-b897-692b4e607287"
+                            UserId = "9ee6a8eb-8586-49fd-826f-5c2ff6b42b09",
+                            RoleId = "054106b4-72bd-402c-8d6a-3354009c3c24"
                         });
                 });
 
@@ -272,49 +275,49 @@ namespace Landing.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "471e92fc-92f8-49cc-a87f-e776109dbcd2",
+                            Id = "fa6f6992-c95b-47a4-ac6f-9e341eb40049",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3bbba01d-330c-4255-80fe-80458bc754aa",
+                            ConcurrencyStamp = "59880dab-8dd7-4057-a0a8-3918286f3c97",
                             Email = "user@outlook.sa",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@OUTLOOK.SA",
                             NormalizedUserName = "USER@OUTLOOK.SA",
-                            PasswordHash = "AQAAAAIAAYagAAAAEPFaXzMCaMdjsF6CwRUt892Cst9v15EZN6dwj4mREOCobG8FbGmpwfFaL3nA3K+yzg==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEMlJbHCXB5uwqD6RABkfwoyxPSYBbbVl+nM9RSzw9wUvJgzsttbRgN8WulRwpsQ6Ag==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "5e1a9f68-bdbe-4b90-b2ea-6b5104750c7f",
+                            SecurityStamp = "4f2e0515-08d3-4670-84dc-07fb77ee26c5",
                             TwoFactorEnabled = false,
                             UserName = "user@outlook.sa"
                         },
                         new
                         {
-                            Id = "de177380-f4e0-44ff-8999-8a2b4138df85",
+                            Id = "338bfdc8-4be9-4a19-9c60-a65bfae6d124",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "838ba6a1-6aa3-4da5-99f2-b7e356c4f542",
+                            ConcurrencyStamp = "8bd9f362-de8e-424d-887b-010fcf280646",
                             Email = "admin@outlook.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@OUTLOOK.COM",
                             NormalizedUserName = "ADMIN@OUTLOOK.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAEKwh9Jn9V3+/HdJ3/qM9QFHpIYiMVfKTo/7s1OcGu/CynUfXDiZE5dokP9DGMKbb2g==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEH79qUwe1MW6RbieN7KnSROMQvgH8YueCxw0BsvXnBxpzLkPhI4QjQqLLS71r9QayA==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "7c952d78-c737-4841-b8c5-34d6cfb7e489",
+                            SecurityStamp = "71c4454d-108f-47d8-ae82-e4b91a823b40",
                             TwoFactorEnabled = false,
                             UserName = "admin@outlook.com"
                         },
                         new
                         {
-                            Id = "7f587113-598f-435d-8449-c33cd94902d7",
+                            Id = "9ee6a8eb-8586-49fd-826f-5c2ff6b42b09",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "a5170606-66ee-4e8a-9155-87cd0b3bfdc1",
+                            ConcurrencyStamp = "b6674983-0f9a-46aa-be17-ed840baa5c36",
                             Email = "superadmin@outlook.com",
                             EmailConfirmed = true,
                             LockoutEnabled = false,
                             NormalizedEmail = "SUPERADMIN@OUTLOOK.COM",
                             NormalizedUserName = "SUPERADMIN@OUTLOOK.COM",
-                            PasswordHash = "AQAAAAIAAYagAAAAENKDeVHVUZDQfndMfwD7qVOWmt0TQh7Ngyzz1ANOb8K2IheuasU6WuocHHKz5Bo/9Q==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEDmdu8RURudNxsQhzFkduanS4RSMPp+Q8Wf98n6s+9ZEQPH2M6H/nwDo/FnveBf4Fw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "62bd04a7-be3a-4930-8d2c-429c9b0912c9",
+                            SecurityStamp = "4fdd751e-4b63-4b85-8352-f890567617e8",
                             TwoFactorEnabled = false,
                             UserName = "superadmin@outlook.com"
                         });
@@ -513,7 +516,7 @@ namespace Landing.DAL.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<decimal>("DiscountPrice")
+                    b.Property<decimal?>("DiscountPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.Property<string>("ImgName")
@@ -526,7 +529,7 @@ namespace Landing.DAL.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
-                    b.Property<bool>("IsNew")
+                    b.Property<bool?>("IsNew")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
