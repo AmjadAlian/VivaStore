@@ -146,8 +146,8 @@ namespace Landing.PL.Controllers
                 }
             }
 
-            return View(vm);
-        
+            return View(nameof(ForgotPassword));
+
         }
         public IActionResult ResetPassword(string email,string token)
         {
